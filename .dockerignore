@@ -1,0 +1,16 @@
+# Ignore VCS
+.git
+
+# Node and build artifacts
+node_modules
+dist
+build
+
+# Local files
+README.md
+Screenshots/
+.devcontainer
+.vscode
+
+# Docker
+.dockerignore
