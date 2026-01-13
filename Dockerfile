@@ -1,18 +1,27 @@
-FROM nginx:stable-alpine
-LABEL org.opencontainers.image.source="https://github.com/GuidoBozward/nigelcode"
+FROM ubuntu:22.04
 
-# Remove default nginx config and content
-RUN rm -rf /usr/share/nginx/html/* /etc/nginx/conf.d/default.conf
+# Install Apache web server
+RUN apt-get update && \
+    apt-get install -y apache2 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Copy website files
-COPY . /usr/share/nginx/html
+# Enable Apache modules
+RUN a2enmod rewrite
+RUN a2enmod ssl
 
-# Copy and make entrypoint script executable
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Set ServerName to suppress warning
+RUN echo "ServerName testme" >> /etc/apache2/apache2.conf
 
-# Cloud Run uses PORT environment variable (default 8080)
-ENV PORT=8080
-EXPOSE 8080
+# Copy website files to Apache document root
+COPY *.html /var/www/html/
+COPY Screenshots /var/www/html/Screenshots/
 
-ENTRYPOINT ["/entrypoint.sh"]
+# Set proper permissions
+RUN chown -R www-data:www-data /var/www/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start Apache in the foreground
+CMD ["apache2ctl", "-D", "FOREGROUND"]
