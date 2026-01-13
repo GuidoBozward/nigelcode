@@ -20,8 +20,8 @@ COPY Screenshots /var/www/html/Screenshots/
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html
 
-# Expose port 8080
-EXPOSE 8080
+# Expose port 3000
+EXPOSE 3000
 
 # Start Apache in the foreground
 CMD ["apache2ctl", "-D", "FOREGROUND"]
