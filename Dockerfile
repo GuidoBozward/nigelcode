@@ -5,7 +5,7 @@ COPY *.html /usr/local/apache2/htdocs/
 COPY Screenshots /usr/local/apache2/htdocs/Screenshots/
 
 # Expose port 80
-EXPOSE 8080
+EXPOSE 3000
 
 # Start Apache in the foreground
 CMD ["httpd-foreground"]
