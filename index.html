@@ -58,21 +58,21 @@
     <div id="file-list"></div>
 
     <script>
-        // List of HTML files in the folder
-        const htmlFiles = [
-            "QC_Analytics.html",
-            "QC_Bulk_Video_Upload.html",
-            "QC_Captions.html",
-            "QC_Duplicate_User_Search.html",
-            "QC_Metadata_Editing.html",
-            "QC_Single_Video_Upload.html"
-        ];
+        // Map of HTML files to pretty display names
+        const htmlFiles = {
+            "QC_Analytics.html": "📊 Analytics",
+            "QC_Bulk_Video_Upload.html": "📹 Bulk Video Upload",
+            "QC_Captions.html": "📝 Captions",
+            "QC_Duplicate_User_Search.html": "🔍 Duplicate User Search",
+            "QC_Metadata_Editing.html": "✏️ Metadata Editing",
+            "QC_Single_Video_Upload.html": "⬆️ Single Video Upload"
+        };
 
         const fileList = document.getElementById('file-list');
 
-        htmlFiles.forEach(file => {
+        Object.entries(htmlFiles).forEach(([file, displayName]) => {
             const button = document.createElement('button');
-            button.textContent = file;
+            button.textContent = displayName;
             button.onclick = () => window.location.href = file;
             fileList.appendChild(button);
         });
