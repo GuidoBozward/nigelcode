@@ -10,8 +10,27 @@
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        li {
+        #file-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             margin-left: 80px;
+        }
+
+        #file-list button {
+            padding: 10px 20px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: left;
+            width: 300px;
+        }
+
+        #file-list button:hover {
+            background-color: #1d4ed8;
         }
     </style>
 </head>
@@ -36,7 +55,7 @@
     <br>
     <br>
 
-    <ul id="file-list"></ul>
+    <div id="file-list"></div>
 
     <script>
         // List of HTML files in the folder
@@ -52,12 +71,10 @@
         const fileList = document.getElementById('file-list');
 
         htmlFiles.forEach(file => {
-            const listItem = document.createElement('li');
-            const link = document.createElement('a');
-            link.href = file;
-            link.textContent = file;
-            listItem.appendChild(link);
-            fileList.appendChild(listItem);
+            const button = document.createElement('button');
+            button.textContent = file;
+            button.onclick = () => window.location.href = file;
+            fileList.appendChild(button);
         });
     </script>
 </body>
