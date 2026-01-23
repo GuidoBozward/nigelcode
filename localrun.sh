@@ -1,2 +1,2 @@
-docker build -t mynigelcode:latest .
-docker run -p 80:3000 mynigelcode:latest
+docker build -t powershelldocker:latest .
+docker run -p 80:3000 powershelldocker:latest
